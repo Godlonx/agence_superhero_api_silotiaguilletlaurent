@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('power', function (Blueprint $table) {
+        Schema::create('powers', function (Blueprint $table) {
             $table->id();
-            $table->string('Name');
-            $table->string('Description');
+            $table->string('name');
+            $table->string('description');
             $table->timestamps();
         });
     }

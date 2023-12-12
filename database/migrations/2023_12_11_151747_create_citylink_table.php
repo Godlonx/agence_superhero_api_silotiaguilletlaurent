@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('citylink', function (Blueprint $table) {
-            $table->integer('CityId');
-            $table->integer('HeroId');
-            $table->primary(['CityId','HeroId']);
-            $table->foreign('CityId')->references('id')->on('City')->onDelete('cascade');
-            $table->foreign('HeroId')->references('id')->on('Hero')->onDelete('cascade');
+        Schema::create('citylinks', function (Blueprint $table) {
+            $table->integer('city_id');
+            $table->integer('hero_id');
+            $table->primary(['city_id','hero_id']);
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->foreign('hero_id')->references('id')->on('heroes')->onDelete('cascade');
             $table->timestamps();
         });
     }
