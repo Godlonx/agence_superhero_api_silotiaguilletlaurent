@@ -10,15 +10,12 @@ use Illuminate\Support\Str;
 
 class HeroSeeder extends Seeder
 {
+    
     /**
      * Run the database seeds.
      */
-    // $genders = 
-    // public function run(): void
-    // {
-    //     DB::table("heroes")->insert([
-    //         'name' => Str::random(6),
-    //         'gender' => Str::random(2),
-    //     ]);
-    // }
+    public function run(): void
+    {
+        
+    }
 }

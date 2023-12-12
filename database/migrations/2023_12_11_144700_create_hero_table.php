@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('team_id');
             $table->integer('transport_way');
             $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
+            $table->foreign('transport_way')->references('id')->on('transports')->onDelete('cascade');
             $table->timestamps();
         });
     }
