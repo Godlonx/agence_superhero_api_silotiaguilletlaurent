@@ -38,7 +38,8 @@ class CityLinkController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $cityLink = CityLink::find($id);
+        return response()->json($cityLink);
     }
 
     /**

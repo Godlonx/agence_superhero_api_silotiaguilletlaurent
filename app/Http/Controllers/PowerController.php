@@ -38,7 +38,8 @@ class PowerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $power = Power::find($id);
+        return response()->json($power);
     }
 
     /**

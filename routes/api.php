@@ -30,13 +30,13 @@ Route::get('/hero/{id}/team', [HeroController::class, 'showTeam']);
 Route::get('/hero/{id}/city', [HeroController::class, 'showCity']);
 
 Route::get('/power', [HeroController::class,'index']);
-Route::get('/power/{id}', [HeroController::class,'showPower']);
+Route::get('/power/{id}', [HeroController::class,'show']);
 
 Route::get('/team', [HeroController::class,'index']);
-Route::get('/team/{id}', [HeroController::class,'showTeam']);
+Route::get('/team/{id}', [HeroController::class,'show']);
 
 Route::get('/city', [HeroController::class,'index']);
-Route::get('/city/{id}', [HeroController::class,'showCity']);
+Route::get('/city/{id}', [HeroController::class,'show']);
 
 Route::get('/city/{id}/hero', [HeroController::class,'showHero']);
 

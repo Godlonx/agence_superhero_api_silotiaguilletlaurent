@@ -38,7 +38,8 @@ class TeamController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $team = Team::find($id);
+        return response()->json($team);
     }
 
     /**

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Hero;
+use App\Models\PowerLink;
+use App\Models\Power;
 
 class HeroController extends Controller
 {
@@ -38,7 +40,15 @@ class HeroController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $hero = Hero::find($id);
+        return response()->json($hero);
+    }
+
+    public function showPower(int $id)
+    {
+        $powerId = PowerLink::select('power_id')->where('hero_id', $id);
+        $power = Power::find($powerId);
+        return response()->json($power);
     }
 
     /**
@@ -65,5 +75,5 @@ class HeroController extends Controller
         //
     }
 
-    
+
 }

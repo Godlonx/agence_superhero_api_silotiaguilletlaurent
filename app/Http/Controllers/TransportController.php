@@ -38,7 +38,8 @@ class TransportController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $transport = Transport::find($id);
+        return response()->json($transport);
     }
 
     /**

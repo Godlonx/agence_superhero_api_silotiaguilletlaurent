@@ -38,7 +38,8 @@ class PowerLinkController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $powerLink = PowerLink::find($id);
+        return response()->json($powerLink);
     }
 
     /**
