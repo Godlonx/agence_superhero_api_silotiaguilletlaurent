@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\HeroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,23 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-
 Route::get('/endpoint', [ApiController::class, 'index']);
+
+Route::get('/hero', [HeroController::class, 'index']);
+Route::get('/hero/{id}', [HeroController::class, 'show']);
+
+Route::get('/hero/{id}/power', [HeroController::class, 'showPower']);
+Route::get('/hero/{id}/team', [HeroController::class, 'showTeam']);
+Route::get('/hero/{id}/city', [HeroController::class, 'showCity']);
+
+Route::get('/power', [HeroController::class,'index']);
+Route::get('/power/{id}', [HeroController::class,'showPower']);
+
+Route::get('/team', [HeroController::class,'index']);
+Route::get('/team/{id}', [HeroController::class,'showTeam']);
+
+Route::get('/city', [HeroController::class,'index']);
+Route::get('/city/{id}', [HeroController::class,'showCity']);
+
+Route::get('/city/{id}/hero', [HeroController::class,'showHero']);
+
