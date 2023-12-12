@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('powerlink', function (Blueprint $table) {
-            $table->string('HeroId');
-            $table->string('PowerId');
-            $table->primary(['HeroId', 'PowerId']);
-            $table->foreign('HeroId')->references('id')->on('hero')->onDelete('cascade');
-            $table->foreign('PowerId')->references('id')->on('power')->onDelete('cascade');
+        Schema::create('powerlinks', function (Blueprint $table) {
+            $table->string('hero_id');
+            $table->string('power_id');
+            $table->primary(['hero_id', 'power_id']);
+            $table->foreign('hero_id')->references('id')->on('heroes')->onDelete('cascade');
+            $table->foreign('power_id')->references('id')->on('powers')->onDelete('cascade');
             $table->timestamps();
         });
     }

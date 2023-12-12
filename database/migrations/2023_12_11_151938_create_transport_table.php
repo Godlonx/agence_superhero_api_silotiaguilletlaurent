@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('transport', function (Blueprint $table) {
             $table->id();
-            $table->string('Name');
-            $table->string('Description');
-            $table->integer('Size');
+            $table->string('name');
+            $table->string('description');
+            $table->integer('size');
             $table->timestamps();
         });
     }
