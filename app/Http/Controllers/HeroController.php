@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Hero;
 use App\Models\PowerLink;
 use App\Models\Power;
+use App\Models\CityLink;
+use App\Models\City;
+use App\Models\Team;
 
 class HeroController extends Controller
 {
@@ -41,15 +44,25 @@ class HeroController extends Controller
     public function show(string $id)
     {
         $hero = Hero::find($id);
-        return response()->json($hero);
-    }
 
-    public function showPower(int $id)
-    {
         $powerId = PowerLink::select('power_id')->where('hero_id', $id);
         $power = Power::find($powerId);
-        return response()->json($power);
+
+        $cityId = CityLink::select('city_id')->where('hero_id', $id);
+        $city = city::find($cityId);
+
+        $teamId = Hero::select('team_id')->where('hero_id', $id);
+        $team = Team::find($teamId);
+
+        return response()->json(array(
+            'hero' => $hero,
+            'power' => $power,
+            'city' => $city,
+            'team' => $team
+        ));
     }
+
+
 
     /**
      * Show the form for editing the specified resource.

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Team;
+use App\Models\Hero;
 
 class TeamController extends Controller
 {
@@ -39,7 +40,11 @@ class TeamController extends Controller
     public function show(string $id)
     {
         $team = Team::find($id);
-        return response()->json($team);
+        $hero = Hero::where('team_id', $id)->get();
+        return response()->json(array(
+            'team' => $team,
+            'hero' => $hero
+        ));
     }
 
     /**

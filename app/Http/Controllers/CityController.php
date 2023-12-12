@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\City;
+use App\Models\CityLink;
 
 class CityController extends Controller
 {
@@ -40,6 +41,13 @@ class CityController extends Controller
     {
         $city = City::find($id);
         return response()->json($city);
+    }
+
+    public function showHero(int $id)
+    {
+        $heroId = CityLink::select('hero_id')->where('city_id', $id);
+        $hero = City::select($heroId);
+        return response()->json($hero);
     }
 
     /**
