@@ -20,8 +20,8 @@ class HeroFactory extends Factory
             'hair_color' => fake()->randomElement(['Red','Blue','Brown','Orange','Blond','Bald']),
             'birth_planet' => Str::random(7),
             'description' => Str::random(50),
-            'team_id' => fake()->randomElement([0,1,2,3,4,5,6,7,8,9]),
-            'transport_way' => fake()->randomElement([0,1,2,3,4,5]),
+            'team_id' => fake()->randomElement([1,2]),
+            'transport_way' => fake()->randomElement([1,2,3,4,5]),
         ];
     }
 }

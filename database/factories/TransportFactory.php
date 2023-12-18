@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class PowersFactory extends Factory
+class TransportFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,7 +19,8 @@ class PowersFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'description' => Str::random(50)
+            'description' => Str::random(50),
+            'size' => fake()->randomDigit()
         ];
     }
 }

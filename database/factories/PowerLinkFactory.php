@@ -17,8 +17,8 @@ class PowerLinkFactory extends Factory
     public function definition(): array
     {
         return [
-            'power_id' => fake()->randomElement([0,1,2,3,4,5,6,7,8,9]),
-            'hero_id' => fake()->randomElement([0,1,2,3,4,5,6,7,8,9])
+            'power_id' => fake()->randomElement([1,2,3,4,5,6,7,8,9,10]),
+            'hero_id' => fake()->randomElement([1,2,3,4,5,6,7,8,9,10])
         ];
     }
 }
