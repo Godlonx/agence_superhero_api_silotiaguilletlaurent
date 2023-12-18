@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\PowerLink;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -16,9 +17,21 @@ class PowerLinkFactory extends Factory
      */
     public function definition(): array
     {
+        do {
+            // Generate a random number
+            $randomPower = mt_rand(1, 10);
+
+            $existingRecord = PowerLink::where('power_id', $randomPower)->first();
+        } while ($existingRecord);
+        do {
+            // Generate a random number
+            $randomNumber = mt_rand(1, 10);
+
+            $existingRecord = PowerLink::where('hero_id', $randomNumber)->first();
+        } while ($existingRecord);
         return [
-            'power_id' => fake()->randomElement([1,2,3,4,5,6,7,8,9,10]),
-            'hero_id' => fake()->randomElement([1,2,3,4,5,6,7,8,9,10])
+            'power_id' => $randomPower,
+            'hero_id' => $randomNumber
         ];
     }
 }
