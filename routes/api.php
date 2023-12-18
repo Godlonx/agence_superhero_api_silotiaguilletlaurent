@@ -30,7 +30,6 @@ Route::get('/hero/{id}', [HeroController::class, 'show']);
 
 Route::get('/power', [PowerController::class,'index']);
 Route::get('/power/{id}', [PowerController::class,'show']);
-Route::get('/power/store', [PowerController::class,'store']);
 
 Route::get('/team', [TeamController::class,'index']);
 Route::get('/team/{id}', [TeamController::class,'show']);

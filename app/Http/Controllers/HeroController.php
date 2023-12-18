@@ -17,8 +17,8 @@ class HeroController extends Controller
      */
     public function index()
     {
-        $users = Hero::all();
 
+        $users = Hero::all();
         return response()->json($users);
     }
 

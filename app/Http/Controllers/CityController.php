@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\City;
 use App\Models\CityLink;
+use Illuminate\Support\Facades\DB;
 
 class CityController extends Controller
 {
