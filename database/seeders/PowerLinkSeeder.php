@@ -4,20 +4,16 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use App\Models\Hero;
+use App\Models\PowerLink;
 
-class HeroSeeder extends Seeder
+class PowerLinkSeeder extends Seeder
 {
-    
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Hero::factory()
+        PowerLink::factory()
             ->count(10)
             ->create();
     }

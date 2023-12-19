@@ -11,16 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('heroes', function (Blueprint $table) {
+        Schema::create('transports', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('gender');
-            $table->string('hair_color');
-            $table->string('birth_planet');
             $table->string('description');
-            $table->integer('team_id');
-            $table->integer('transport_way');
-            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
+            $table->integer('size');
             $table->timestamps();
         });
     }
@@ -30,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hero');
+        Schema::dropIfExists('transport');
     }
 };
