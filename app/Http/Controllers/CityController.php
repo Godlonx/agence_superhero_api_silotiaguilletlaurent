@@ -12,6 +12,13 @@ class CityController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    /**
+     * @OA\Get(
+     *     path="/api/city",
+     *     @OA\Response(response="200", description="Display all cities")
+     * )
+     */
     public function index()
     {
         $users = City::all();
@@ -36,7 +43,18 @@ class CityController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/api/city/{id}",
+     *     @OA\Parameter(
+    *          name="id",
+    *          in="path",
+    *          required=true,
+    *          description="ID of the city",
+    *          @OA\Schema(type="integer")
+    *      ),
+     *     @OA\Response(response="200", description="Display a specific city and its heroes")
+     *
+     * )
      */
     public function show(string $id)
     {

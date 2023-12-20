@@ -8,8 +8,11 @@ use App\Models\Hero;
 
 class TeamController extends Controller
 {
-    /**
-     * Display a listing of the resource.
+        /**
+     * @OA\Get(
+     *     path="/api/team",
+     *     @OA\Response(response="200", description="Display all team")
+     * )
      */
     public function index()
     {
@@ -35,7 +38,18 @@ class TeamController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/api/team/{id}",
+     *     @OA\Parameter(
+    *          name="id",
+    *          in="path",
+    *          required=true,
+    *          description="ID of the city",
+    *          @OA\Schema(type="integer")
+    *      ),
+     *     @OA\Response(response="200", description="Display a specific team and its heroes")
+     *
+     * )
      */
     public function show(string $id)
     {

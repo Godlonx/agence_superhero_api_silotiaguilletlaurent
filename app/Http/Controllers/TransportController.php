@@ -7,9 +7,7 @@ use App\Models\Transport;
 
 class TransportController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $users = Transport::all();
@@ -33,9 +31,7 @@ class TransportController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
         $transport = Transport::find($id);
