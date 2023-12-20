@@ -16,6 +16,13 @@ class HeroController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    /**
+     * @OA\Get(
+     *     path="/api/hero",
+     *     @OA\Response(response="200", description="Display all heroes")
+     * )
+     */
     public function index()
     {
 
@@ -41,9 +48,19 @@ class HeroController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+     * @OA\Get(
+     *     path="/api/hero/{id}",
+     *     @OA\Parameter(
+    *          name="id",
+    *          in="path",
+    *          required=true,
+    *          description="ID of the hero",
+    *          @OA\Schema(type="integer")
+    *      ),
+     *     @OA\Response(response="200", description="Display a specific hero and his power, transport, city and team")
+     *
+     * )
+     */    public function show(string $id)
     {
         $hero = Hero::find($id);
 

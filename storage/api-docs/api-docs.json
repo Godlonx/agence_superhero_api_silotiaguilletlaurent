@@ -1,0 +1,40 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My First API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/hero": {
+            "get": {
+                "operationId": "df30085c1784aaa94727132391699837",
+                "responses": {
+                    "200": {
+                        "description": "Display all heroes"
+                    }
+                }
+            }
+        },
+        "/api/hero/{id}": {
+            "get": {
+                "operationId": "d654731c0fa7cbd45d89898b400c557b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the hero",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Display a specific hero and his power, transport, city and team"
+                    }
+                }
+            }
+        }
+    }
+}
