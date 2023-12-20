@@ -9,6 +9,7 @@ use App\Models\Power;
 use App\Models\CityLink;
 use App\Models\City;
 use App\Models\Team;
+use App\Models\Transport;
 
 class HeroController extends Controller
 {
@@ -18,8 +19,9 @@ class HeroController extends Controller
     public function index()
     {
 
-        $users = Hero::all();
-        return response()->json($users);
+        $hero = Hero::all();
+        $hero=$hero->makeHidden(['updated_at', 'created_at']);
+        return response()->json($hero);
     }
 
     /**
@@ -48,15 +50,20 @@ class HeroController extends Controller
         $powerId = PowerLink::select('power_id')->where('hero_id', $id);
         $power = Power::find($powerId);
 
-        $cityId = CityLink::select('city_id')->where('hero_id', $id);
-        $city = city::find($cityId);
+        $transportId = Hero::select('transport_way')->where('id', $id);
+        $transport = Transport::find($transportId);
 
-        $teamId = Hero::select('team_id')->where('hero_id', $id);
+        $cityId = CityLink::select('city_id')->where('hero_id', $id);
+        $city = City::find($cityId);
+
+
+        $teamId = Hero::select('team_id')->where('id', $id);
         $team = Team::find($teamId);
 
         return response()->json(array(
             'hero' => $hero,
             'power' => $power,
+            'transport' => $transport,
             'city' => $city,
             'team' => $team
         ));

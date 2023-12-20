@@ -19,7 +19,7 @@ class PowerFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'description' => Str::random(50)
+            'description' => Str::random(25)
         ];
     }
 }

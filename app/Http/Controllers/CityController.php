@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\City;
 use App\Models\CityLink;
-use Illuminate\Support\Facades\DB;
+use App\Models\Hero;
 
 class CityController extends Controller
 {
@@ -41,14 +41,15 @@ class CityController extends Controller
     public function show(string $id)
     {
         $city = City::find($id);
-        return response()->json($city);
-    }
 
-    public function showHero(int $id)
-    {
-        $heroId = CityLink::select('hero_id')->where('city_id', $id);
-        $hero = City::select($heroId);
-        return response()->json($hero);
+        $heroId = CityLink::select('hero_id')->where('city_id', $id)->get();
+
+        $hero = Hero::whereIn('id', $heroId)->get();
+
+        return response()->json(array(
+            'city' => $city,
+            'hero' => $hero
+        ));
     }
 
     /**
