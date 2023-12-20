@@ -10,6 +10,7 @@ use App\Models\CityLink;
 use App\Models\City;
 use App\Models\Team;
 use App\Models\Transport;
+use Illuminate\Support\Facades\Auth;
 
 class HeroController extends Controller
 {
@@ -25,6 +26,11 @@ class HeroController extends Controller
      */
     public function index()
     {
+
+        if (!Auth::check()) {
+            // If not authenticated, redirect to the login page
+            return response(401);
+        }
 
         $hero = Hero::all();
         $hero=$hero->makeHidden(['updated_at', 'created_at']);
@@ -57,11 +63,22 @@ class HeroController extends Controller
     *          description="ID of the hero",
     *          @OA\Schema(type="integer")
     *      ),
+    *
      *     @OA\Response(response="200", description="Display a specific hero and his power, transport, city and team")
      *
      * )
-     */    public function show(string $id)
+     */
+    public function show(string $id,Request $request)
     {
+
+        if (!Auth::check()) {
+            // If not authenticated, redirect to the login page
+            return response(401);
+        }
+
+        $token = $request->token;
+
+
         $hero = Hero::find($id);
 
         $powerId = PowerLink::select('power_id')->where('hero_id', $id);
@@ -77,6 +94,7 @@ class HeroController extends Controller
         $teamId = Hero::select('team_id')->where('id', $id);
         $team = Team::find($teamId);
 
+
         return response()->json(array(
             'hero' => $hero,
             'power' => $power,
@@ -84,6 +102,7 @@ class HeroController extends Controller
             'city' => $city,
             'team' => $team
         ));
+
     }
 
 
