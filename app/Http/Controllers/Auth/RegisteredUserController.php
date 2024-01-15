@@ -28,7 +28,6 @@ class RegisteredUserController extends Controller
  *              @OA\Property(property="email", type="string", format="email"),
  *              @OA\Property(property="password", type="string", format="password"),
  *              @OA\Property(property="password_confirmation", type="string", format="password"),
- *              @OA\Property(property="_token", type="string"),
  *          ),
  *      ),
  *      @OA\Response(

@@ -22,14 +22,14 @@ class HeroController extends Controller
      * @OA\Get(
      *     path="/api/hero",
      *     @OA\Response(response="200", description="Display all heroes")
+     *     @OA\Response(response="405", description="Not connected")
      * )
      */
     public function index()
     {
-
         if (!Auth::check()) {
             // If not authenticated, redirect to the login page
-            return response(401);
+            return redirect('/api/login');
         }
 
         $hero = Hero::all();
