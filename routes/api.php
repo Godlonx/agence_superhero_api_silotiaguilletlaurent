@@ -34,7 +34,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/guest', [GuestController::class,'index']);
+Route::get('/guest', [GuestController::class,'index'])
+    ->middleware('guest')
+    ->name('guest');;
 
 Route::middleware(['web','auth:sanctum'])->group(function () {
     Route::get('/hero', [HeroController::class, 'index']);
