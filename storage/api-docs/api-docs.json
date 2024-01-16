@@ -31,9 +31,6 @@
                                     "password": {
                                         "type": "string",
                                         "format": "password"
-                                    },
-                                    "_token": {
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -114,9 +111,6 @@
                                     "password_confirmation": {
                                         "type": "string",
                                         "format": "password"
-                                    },
-                                    "_token": {
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -194,12 +188,36 @@
                 }
             }
         },
+        "/api/guest": {
+            "get": {
+                "operationId": "f0f74000b26dc33bff25d691fb5ef9fc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "unauthorized page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Not connected"
+                    }
+                }
+            }
+        },
         "/api/hero": {
             "get": {
                 "operationId": "df30085c1784aaa94727132391699837",
                 "responses": {
                     "200": {
                         "description": "Display all heroes"
+                    },
+                    "405": {
+                        "description": "Not connected"
                     }
                 }
             }
@@ -220,7 +238,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Display a specific hero and his power, transport, city and team"
+                        "description": "Display a specific hero and his power, transport, city, and team"
                     }
                 }
             }

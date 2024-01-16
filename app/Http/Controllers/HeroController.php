@@ -21,21 +21,15 @@ class HeroController extends Controller
     /**
      * @OA\Get(
      *     path="/api/hero",
-     *     @OA\Response(response="200", description="Display all heroes")
+     *     @OA\Response(response="200", description="Display all heroes"),
      *     @OA\Response(response="405", description="Not connected")
      * )
      */
     public function index()
     {
-        if (!Auth::check()) {
-            echo "Not connected";
-            return response(401);
-        }else{
-
-            $hero = Hero::all();
-            $hero=$hero->makeHidden(['updated_at', 'created_at']);
-            return response()->json($hero);
-        }
+        $hero = Hero::all();
+        $hero=$hero->makeHidden(['updated_at', 'created_at']);
+        return response()->json($hero);
     }
 
     /**
@@ -58,15 +52,13 @@ class HeroController extends Controller
      * @OA\Get(
      *     path="/api/hero/{id}",
      *     @OA\Parameter(
-    *          name="id",
-    *          in="path",
-    *          required=true,
-    *          description="ID of the hero",
-    *          @OA\Schema(type="integer")
-    *      ),
-    *
-     *     @OA\Response(response="200", description="Display a specific hero and his power, transport, city and team")
-     *
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          description="ID of the hero",
+     *          @OA\Schema(type="integer")
+     *      ),
+     *     @OA\Response(response="200", description="Display a specific hero and his power, transport, city, and team")
      * )
      */
     public function show(string $id,Request $request)
