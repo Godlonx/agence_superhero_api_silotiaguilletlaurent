@@ -7,6 +7,8 @@ use App\Http\Controllers\HeroController;
 use App\Http\Controllers\PowerController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\TransportController;
+use App\Http\Controllers\GuestController;
 
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -32,19 +34,31 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::middleware(['auth:sanctum','web'])->group(function () {
+
+Route::get('/guest', [GuestController::class,'index'])
+    ->middleware('guest')
+    ->name('guest');
+
+
+Route::middleware(['web','auth:sanctum'])->group(function () {
     Route::get('/hero', [HeroController::class, 'index']);
     Route::get('/hero/{id}', [HeroController::class, 'show']);
+    Route::post('/hero/create', [HeroController::class, 'store']);
 
     Route::get('/power', [PowerController::class,'index']);
     Route::get('/power/{id}', [PowerController::class,'show']);
+    Route::post('/power/create', [PowerController::class,'store']);
 
     Route::get('/team', [TeamController::class,'index']);
     Route::get('/team/{id}', [TeamController::class,'show']);
+    Route::post('/team/create', [TeamController::class,'store']);
 
     Route::get('/city', [CityController::class,'index']);
     Route::get('/city/{id}', [CityController::class,'show']);
     Route::get('/city/{id}/hero', [CityController::class,'showHero']);
+
+    Route::get('/transport', [TransportController::class,'index']);
+    Route::get('/transport/{id}', [TransportController::class,'show']);
 
 });
 Route::get('/endpoint', [ApiController::class, 'index']);
@@ -54,31 +68,33 @@ Route::get('/endpoint', [ApiController::class, 'index']);
 
 
 
+Route::middleware('web')->group(function () {
+    Route::post('/register', [RegisteredUserController::class, 'store'])
+                    ->middleware('guest')
+                    ->name('register');
 
-Route::post('/register', [RegisteredUserController::class, 'store'])
-                ->middleware('guest')
-                ->name('register');
+    Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+                    ->middleware('guest')
+                    ->name('login');
 
-Route::post('/login', [AuthenticatedSessionController::class, 'store'])
-                ->middleware('guest')
-                ->name('login');
+    Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
+                    ->middleware('guest')
+                    ->name('password.email');
 
-Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
-                ->middleware('guest')
-                ->name('password.email');
+    Route::post('/reset-password', [NewPasswordController::class, 'store'])
+                    ->middleware('guest')
+                    ->name('password.store');
 
-Route::post('/reset-password', [NewPasswordController::class, 'store'])
-                ->middleware('guest')
-                ->name('password.store');
+    Route::get('/verify-email/{id}/{hash}', VerifyEmailController::class)
+                    ->middleware(['auth', 'signed', 'throttle:6,1'])
+                    ->name('verification.verify');
 
-Route::get('/verify-email/{id}/{hash}', VerifyEmailController::class)
-                ->middleware(['auth', 'signed', 'throttle:6,1'])
-                ->name('verification.verify');
+    Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
+                    ->middleware(['auth', 'throttle:6,1'])
+                    ->name('verification.send');
 
-Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
-                ->middleware(['auth', 'throttle:6,1'])
-                ->name('verification.send');
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+                    ->middleware('auth')
+                    ->name('logout');
 
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
-                ->middleware('auth')
-                ->name('logout');
+});

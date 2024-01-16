@@ -31,9 +31,6 @@
                                     "password": {
                                         "type": "string",
                                         "format": "password"
-                                    },
-                                    "_token": {
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -114,9 +111,6 @@
                                     "password_confirmation": {
                                         "type": "string",
                                         "format": "password"
-                                    },
-                                    "_token": {
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -194,12 +188,142 @@
                 }
             }
         },
+        "/api/guest": {
+            "get": {
+                "operationId": "f0f74000b26dc33bff25d691fb5ef9fc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "unauthorized page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Not connected"
+                    }
+                }
+            }
+        },
         "/api/hero": {
             "get": {
                 "operationId": "df30085c1784aaa94727132391699837",
                 "responses": {
                     "200": {
                         "description": "Display all heroes"
+                    },
+                    "405": {
+                        "description": "Not connected"
+                    }
+                }
+            }
+        },
+        "/api/hero/create": {
+            "post": {
+                "tags": [
+                    "Creation"
+                ],
+                "summary": "Create a hero",
+                "operationId": "a969e1584e2db760265d9f3b1cb5a025",
+                "requestBody": {
+                    "description": "Create a new hero",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "gender",
+                                    "hair_color",
+                                    "birth_planet",
+                                    "description",
+                                    "team_id",
+                                    "transport_way",
+                                    "city_id",
+                                    "power_id"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "hair_color": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "birth_planet": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "team_id": {
+                                        "type": "integer",
+                                        "format": "int"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "transport_way": {
+                                        "type": "integer",
+                                        "format": "text"
+                                    },
+                                    "city_id": {
+                                        "type": "integer",
+                                        "format": "int"
+                                    },
+                                    "power_id": {
+                                        "type": "integer",
+                                        "format": "int"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data successfully added"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -220,7 +344,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Display a specific hero and his power, transport, city and team"
+                        "description": "Display a specific hero and his power, transport, city, and team"
                     }
                 }
             }
@@ -231,6 +355,77 @@
                 "responses": {
                     "200": {
                         "description": "Display all powers"
+                    }
+                }
+            }
+        },
+        "/api/power/create": {
+            "post": {
+                "tags": [
+                    "Creation"
+                ],
+                "summary": "Create a power",
+                "operationId": "55a7ebe34f4bb9b114d8ef54ee12d623",
+                "requestBody": {
+                    "description": "Create a new power",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data successfully added"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -266,6 +461,72 @@
                 }
             }
         },
+        "/api/team/create": {
+            "post": {
+                "tags": [
+                    "Creation"
+                ],
+                "summary": "Create a team",
+                "operationId": "107099cc4e7ed66a9dae60826292b16e",
+                "requestBody": {
+                    "description": "Create a new team",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Team successfully added"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/team/{id}": {
             "get": {
                 "operationId": "71327544c30baa9706be0707cfeb2459",
@@ -283,6 +544,40 @@
                 "responses": {
                     "200": {
                         "description": "Display a specific team and its heroes"
+                    }
+                }
+            }
+        },
+        "/api/transport": {
+            "get": {
+                "operationId": "b7f0216947d61b7904187ade2f36a818",
+                "responses": {
+                    "200": {
+                        "description": "Display all transport"
+                    },
+                    "405": {
+                        "description": "Not connected"
+                    }
+                }
+            }
+        },
+        "/api/transport/{id}": {
+            "get": {
+                "operationId": "70527cd4cfd2f55202dfd5cc4f137767",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the transport",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Display a specific transport"
                     }
                 }
             }

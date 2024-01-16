@@ -29,13 +29,52 @@ class TeamController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+/**
+ * @OA\Post(
+ *      path="/api/team/create",
+ *      summary="Create a team",
+ *      tags={"Creation"},
+ *      @OA\RequestBody(
+ *          required=true,
+ *          description="Create a new team",
+ *          @OA\JsonContent(
+ *              required={"name"},
+ *              @OA\Property(property="name", type="string", format="text")
+ *          ),
+ *      ),
+ *      @OA\Response(
+ *          response=201,
+ *          description="Data successfully added",
+ *          @OA\JsonContent(
+ *              type="object",
+ *              @OA\Property(property="message", type="string", example="Team successfully added"),
+ *          ),
+ *      ),
+ *      @OA\Response(
+ *          response=422,
+ *          description="Validation error",
+ *          @OA\JsonContent(
+ *              type="object",
+ *              @OA\Property(property="message", type="string", example="The given data was invalid."),
+ *              @OA\Property(property="errors", type="object"),
+ *          ),
+ *      ),
+ * )
+ */
+public function store(Request $request)
+{
+    $data = $request->validate([
+        'name' => 'required'
+    ]);
+
+
+    $team = new Team();
+    $team->name = $data['name'];
+    $team->save();
+
+    return response()->json($team, 201);
+
+}
 
     /**
      * @OA\Get(

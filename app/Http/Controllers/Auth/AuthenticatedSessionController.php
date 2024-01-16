@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
+/**
  * @OA\Post(
  *      path="/api/login",
  *      operationId="loginUser",
@@ -67,7 +67,7 @@ class AuthenticatedSessionController extends Controller
             $request->session()->regenerate();
 
             // Return the token in the response
-            return response()->json(['token' => $token], 200);
+            return response()->json(['token' => $token], 201);
         }
 
         // Return an error response if authentication fails
