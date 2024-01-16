@@ -27,10 +27,15 @@ class HeroController extends Controller
      */
     public function index()
     {
+        if (!Auth::check()) {
+            echo "Not connected";
+            return response(401);
+        }else{
 
-        $hero = Hero::all();
-        $hero=$hero->makeHidden(['updated_at', 'created_at']);
-        return response()->json($hero);
+            $hero = Hero::all();
+            $hero=$hero->makeHidden(['updated_at', 'created_at']);
+            return response()->json($hero);
+        }
     }
 
     /**
