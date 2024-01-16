@@ -41,11 +41,80 @@ class HeroController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
+ * @OA\Post(
+ *      path="/api/hero/create",
+ *      summary="Create a hero",
+ *      tags={"Creation"},
+ *      @OA\RequestBody(
+ *          required=true,
+ *          description="Create a new hero",
+ *          @OA\JsonContent(
+ *              required={"name","gender","hair_color","birth_planet","description","team_id","transport_way","city_id","power_id"},
+ *              @OA\Property(property="name", type="string", format="text"),
+ *              @OA\Property(property="gender", type="string", format="text"),
+ *              @OA\Property(property="hair_color", type="string", format="text"),
+ *              @OA\Property(property="birth_planet", type="string", format="text"),
+ *              @OA\Property(property="team_id", type="integer", format="int"),
+ *              @OA\Property(property="description", type="string", format="text"),
+ *              @OA\Property(property="transport_way", type="integer", format="text"),
+ *              @OA\Property(property="city_id", type="integer", format="int"),
+ *              @OA\Property(property="power_id", type="integer", format="int")
+ *
+ *          ),
+ *      ),
+ *      @OA\Response(
+ *          response=201,
+ *          description="Data successfully added",
+ *          @OA\JsonContent(
+ *              type="object",
+ *              @OA\Property(property="message", type="string", example="Data successfully added"),
+ *          ),
+ *      ),
+ *      @OA\Response(
+ *          response=422,
+ *          description="Validation error",
+ *          @OA\JsonContent(
+ *              type="object",
+ *              @OA\Property(property="message", type="string", example="The given data was invalid."),
+ *              @OA\Property(property="errors", type="object"),
+ *          ),
+ *      ),
+ * )
+ */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'gender' => 'required',
+            'hair_color' => 'required',
+            'birth_planet' => 'required',
+            'description' => 'required',
+            'team_id' => 'required',
+            'transport_way' => 'required',
+            //'city_id' => 'required',
+            'power_id' => 'required'
+        ]);
+
+
+        $hero = new Hero();
+        $hero->name = $data['name'];
+        $hero->gender = $data['gender'];
+        $hero->hair_color = $data['hair_color'];
+        $hero->birth_planet = $data['birth_planet'];
+        $hero->description = $data['description'];
+        $hero->team_id = $data['team_id'];
+        $hero->transport_way = $data['transport_way'];
+
+        $hero->save();
+
+        $powerLink = new PowerLink();
+        $powerLink->hero_id = $hero->id;
+        $powerLink->power_id = $data['power_id'];
+        $powerLink->save();
+        //$hero->city()->attach($data['city_id']);
+
+
+        return response()->json($hero, 201);
     }
 
     /**

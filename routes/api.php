@@ -7,6 +7,7 @@ use App\Http\Controllers\HeroController;
 use App\Http\Controllers\PowerController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\TransportController;
 use App\Http\Controllers\GuestController;
 
 
@@ -42,6 +43,7 @@ Route::get('/guest', [GuestController::class,'index'])
 Route::middleware(['web','auth:sanctum'])->group(function () {
     Route::get('/hero', [HeroController::class, 'index']);
     Route::get('/hero/{id}', [HeroController::class, 'show']);
+    Route::post('/hero/create', [HeroController::class, 'store']);
 
     Route::get('/power', [PowerController::class,'index']);
     Route::get('/power/{id}', [PowerController::class,'show']);
@@ -49,10 +51,14 @@ Route::middleware(['web','auth:sanctum'])->group(function () {
 
     Route::get('/team', [TeamController::class,'index']);
     Route::get('/team/{id}', [TeamController::class,'show']);
+    Route::post('/team/create', [TeamController::class,'store']);
 
     Route::get('/city', [CityController::class,'index']);
     Route::get('/city/{id}', [CityController::class,'show']);
     Route::get('/city/{id}/hero', [CityController::class,'showHero']);
+
+    Route::get('/transport', [TransportController::class,'index']);
+    Route::get('/transport/{id}', [TransportController::class,'show']);
 
 });
 Route::get('/endpoint', [ApiController::class, 'index']);

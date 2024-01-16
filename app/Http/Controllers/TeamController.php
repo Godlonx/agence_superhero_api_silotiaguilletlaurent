@@ -36,19 +36,18 @@ class TeamController extends Controller
  *      tags={"Creation"},
  *      @OA\RequestBody(
  *          required=true,
- *          description="Create a new power",
+ *          description="Create a new team",
  *          @OA\JsonContent(
- *              required={"name", "description"},
- *              @OA\Property(property="name", type="string", format="text"),
- *              @OA\Property(property="description", type="string", format="text")
+ *              required={"name"},
+ *              @OA\Property(property="name", type="string", format="text")
  *          ),
  *      ),
  *      @OA\Response(
  *          response=201,
- *          description="User successfully logged",
+ *          description="Data successfully added",
  *          @OA\JsonContent(
  *              type="object",
- *              @OA\Property(property="message", type="string", example="Data successfully added"),
+ *              @OA\Property(property="message", type="string", example="Team successfully added"),
  *          ),
  *      ),
  *      @OA\Response(
@@ -65,17 +64,15 @@ class TeamController extends Controller
 public function store(Request $request)
 {
     $data = $request->validate([
-        'name' => 'required',
-        'description' => 'required',
+        'name' => 'required'
     ]);
 
 
-    $power = new Power();
-    $power->name = $data['name'];
-    $power->description = $data['description'];
-    $power->save();
+    $team = new Team();
+    $team->name = $data['name'];
+    $team->save();
 
-    return response()->json($power, 201);
+    return response()->json($team, 201);
 
 }
 

@@ -44,7 +44,7 @@ class PowerController extends Controller
  *      ),
  *      @OA\Response(
  *          response=201,
- *          description="User successfully logged",
+ *          description="Data successfully added",
  *          @OA\JsonContent(
  *              type="object",
  *              @OA\Property(property="message", type="string", example="Data successfully added"),
