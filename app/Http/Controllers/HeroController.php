@@ -27,10 +27,6 @@ class HeroController extends Controller
      */
     public function index()
     {
-        if (!Auth::check()) {
-            // If not authenticated, redirect to the login page
-            return redirect('/api/login');
-        }
 
         $hero = Hero::all();
         $hero=$hero->makeHidden(['updated_at', 'created_at']);

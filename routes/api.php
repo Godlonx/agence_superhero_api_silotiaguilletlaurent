@@ -32,31 +32,26 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::middleware(['auth:sanctum','web'])->group(function () {
+    Route::get('/hero', [HeroController::class, 'index']);
+    Route::get('/hero/{id}', [HeroController::class, 'show']);
 
+    Route::get('/power', [PowerController::class,'index']);
+    Route::get('/power/{id}', [PowerController::class,'show']);
+
+    Route::get('/team', [TeamController::class,'index']);
+    Route::get('/team/{id}', [TeamController::class,'show']);
+
+    Route::get('/city', [CityController::class,'index']);
+    Route::get('/city/{id}', [CityController::class,'show']);
+    Route::get('/city/{id}/hero', [CityController::class,'showHero']);
+
+});
 Route::get('/endpoint', [ApiController::class, 'index']);
 
-Route::get('/hero', [HeroController::class, 'index'])
-    ->middleware('auth:sanctum');
 
-Route::get('/hero/{id}', [HeroController::class, 'show'])
-    ->middleware('auth:sanctum');
 
-Route::get('/power', [PowerController::class,'index'])
-    ->middleware('auth:sanctum');
-Route::get('/power/{id}', [PowerController::class,'show'])
-    ->middleware('auth:sanctum');
 
-Route::get('/team', [TeamController::class,'index'])
-    ->middleware('auth:sanctum');
-Route::get('/team/{id}', [TeamController::class,'show'])
-    ->middleware('auth:sanctum');
-
-Route::get('/city', [CityController::class,'index'])
-    ->middleware('auth:sanctum');
-Route::get('/city/{id}', [CityController::class,'show'])
-    ->middleware('auth:sanctum');
-Route::get('/city/{id}/hero', [CityController::class,'showHero'])
-    ->middleware('auth:sanctum');
 
 
 
