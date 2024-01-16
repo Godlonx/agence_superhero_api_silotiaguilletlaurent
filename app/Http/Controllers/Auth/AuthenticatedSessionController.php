@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
+/**
  * @OA\Post(
  *      path="/api/login",
  *      operationId="loginUser",

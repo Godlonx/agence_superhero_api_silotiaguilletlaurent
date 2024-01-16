@@ -38,12 +38,14 @@ Route::get('/guest', [GuestController::class,'index'])
     ->middleware('guest')
     ->name('guest');
 
+
 Route::middleware(['web','auth:sanctum'])->group(function () {
     Route::get('/hero', [HeroController::class, 'index']);
     Route::get('/hero/{id}', [HeroController::class, 'show']);
 
     Route::get('/power', [PowerController::class,'index']);
     Route::get('/power/{id}', [PowerController::class,'show']);
+    Route::post('/power/create', [PowerController::class,'store']);
 
     Route::get('/team', [TeamController::class,'index']);
     Route::get('/team/{id}', [TeamController::class,'show']);

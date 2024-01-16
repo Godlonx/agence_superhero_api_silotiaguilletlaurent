@@ -64,14 +64,6 @@ class HeroController extends Controller
     public function show(string $id,Request $request)
     {
 
-        if (!Auth::check()) {
-            // If not authenticated, redirect to the login page
-            return response(401);
-        }
-
-        $token = $request->token;
-
-
         $hero = Hero::find($id);
 
         $powerId = PowerLink::select('power_id')->where('hero_id', $id);
