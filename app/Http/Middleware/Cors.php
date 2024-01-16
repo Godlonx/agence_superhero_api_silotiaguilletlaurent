@@ -14,17 +14,17 @@ class Cors
      * @return mixed
      */
     public function handle($request, Closure $next)
-{
-    $allowedOrigins = ['http://localhost:3000'];
+    {
+        $allowedOrigins = ['http://localhost:3000'];
 
-    $origin = $request->headers->get('Origin');
+        $origin = $request->headers->get('Origin');
 
-    if (in_array($origin, $allowedOrigins)) {
-        return $next($request)
-            ->header('Access-Control-Allow-Origin', $origin)
-            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        if (in_array($origin, $allowedOrigins)) {
+            return $next($request)
+                ->header('Access-Control-Allow-Origin', $origin)
+                ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        }
+
+        return $next($request);
     }
-
-    return $next($request);
-}
 }
