@@ -41,16 +41,22 @@ Route::get('/hero', [HeroController::class, 'index'])
 Route::get('/hero/{id}', [HeroController::class, 'show'])
     ->middleware('auth:sanctum');
 
-Route::get('/power', [PowerController::class,'index']);
-Route::get('/power/{id}', [PowerController::class,'show']);
+Route::get('/power', [PowerController::class,'index'])
+    ->middleware('auth:sanctum');
+Route::get('/power/{id}', [PowerController::class,'show'])
+    ->middleware('auth:sanctum');
 
-Route::get('/team', [TeamController::class,'index']);
-Route::get('/team/{id}', [TeamController::class,'show']);
+Route::get('/team', [TeamController::class,'index'])
+    ->middleware('auth:sanctum');
+Route::get('/team/{id}', [TeamController::class,'show'])
+    ->middleware('auth:sanctum');
 
-Route::get('/city', [CityController::class,'index']);
-Route::get('/city/{id}', [CityController::class,'show']);
-
-Route::get('/city/{id}/hero', [CityController::class,'showHero']);
+Route::get('/city', [CityController::class,'index'])
+    ->middleware('auth:sanctum');
+Route::get('/city/{id}', [CityController::class,'show'])
+    ->middleware('auth:sanctum');
+Route::get('/city/{id}/hero', [CityController::class,'showHero'])
+    ->middleware('auth:sanctum');
 
 
 
