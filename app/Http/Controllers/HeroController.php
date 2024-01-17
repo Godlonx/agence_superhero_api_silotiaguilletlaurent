@@ -178,11 +178,26 @@ class HeroController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/api/hero/{id}/delete",
+     *     tags={"Delete"},
+     *     @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          description="ID of the hero",
+     *          @OA\Schema(type="integer")
+     *      ),
+     *     @OA\Response(response="204", description="Data successfully deleted")
+     * )
      */
     public function destroy(string $id)
     {
-        //
+        $hero = Hero::find($id);
+        $hero->delete();
+        $powerLink = PowerLink::where('hero_id', $id);
+        $powerLink->delete();
+        return response()->json(null, 204);
     }
 
 

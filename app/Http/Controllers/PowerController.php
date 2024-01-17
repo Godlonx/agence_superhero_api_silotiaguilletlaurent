@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Power;
+use App\Models\PowerLink;
 
 class PowerController extends Controller
 {
@@ -115,10 +116,25 @@ class PowerController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/api/power/{id}/delete",
+     *     tags={"Delete"},
+     *     @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          description="ID of the power",
+     *          @OA\Schema(type="integer")
+     *      ),
+     *     @OA\Response(response="204", description="Data successfully deleted")
+     * )
      */
     public function destroy(string $id)
     {
-        //
+        $power = Power::find($id);
+        $power->delete();
+        $powerLink = PowerLink::where('power_id', $id);
+        $powerLink->delete();
+        return response()->json(null, 204);
     }
 }

@@ -26,20 +26,62 @@ class CityController extends Controller
         return response()->json($users);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+ /**
+ * @OA\Post(
+ *      path="/api/city/create",
+ *      summary="Create a city",
+ *      tags={"Creation"},
+ *      @OA\RequestBody(
+ *          required=true,
+ *          description="Create a new city",
+ *          @OA\JsonContent(
+ *              required={"name", "description","size"},
+ *              @OA\Property(property="name", type="string", format="text"),
+ *              @OA\Property(property="description", type="string", format="text"),
+ *              @OA\Property(property="size", type="integer", format="text")
+ *          ),
+ *      ),
+ *      @OA\Response(
+ *          response=201,
+ *          description="Data successfully added",
+ *          @OA\JsonContent(
+ *              type="object",
+ *              @OA\Property(property="message", type="string", example="Data successfully added"),
+ *          ),
+ *      ),
+ *      @OA\Response(
+ *          response=422,
+ *          description="Validation error",
+ *          @OA\JsonContent(
+ *              type="object",
+ *              @OA\Property(property="message", type="string", example="The given data was invalid."),
+ *              @OA\Property(property="errors", type="object"),
+ *          ),
+ *      ),
+ * )
+ */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'size' => 'required'
+        ]);
+
+        $city = new City();
+        $city->name = $data['name'];
+        $city->description = $data['description'];
+        $city->size = $data['size'];
+        $city->save();
+
+        return response()->json($city, 201);
+
     }
 
     /**
@@ -87,10 +129,25 @@ class CityController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/api/city/{id}/delete",
+     *     tags={"Delete"},
+     *     @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          description="ID of the city",
+     *          @OA\Schema(type="integer")
+     *      ),
+     *     @OA\Response(response="204", description="Data successfully deleted")
+     * )
      */
     public function destroy(string $id)
     {
-        //
+        $city = City::find($id);
+        $city->delete();
+        $cityLink = CityLink::where('city_id', $id);
+        $cityLink->delete();
+        return response()->json(null, 204);
     }
 }

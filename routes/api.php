@@ -44,10 +44,12 @@ Route::middleware(['web','auth:sanctum'])->group(function () {
     Route::get('/hero', [HeroController::class, 'index']);
     Route::get('/hero/{id}', [HeroController::class, 'show']);
     Route::post('/hero/create', [HeroController::class, 'store']);
+    Route::delete('/hero/{id}/delete', [HeroController::class, 'destroy']);
 
     Route::get('/power', [PowerController::class,'index']);
     Route::get('/power/{id}', [PowerController::class,'show']);
     Route::post('/power/create', [PowerController::class,'store']);
+    Route::delete('/power/{id}/delete', [PowerController::class,'destroy']);
 
     Route::get('/team', [TeamController::class,'index']);
     Route::get('/team/{id}', [TeamController::class,'show']);
@@ -56,6 +58,8 @@ Route::middleware(['web','auth:sanctum'])->group(function () {
     Route::get('/city', [CityController::class,'index']);
     Route::get('/city/{id}', [CityController::class,'show']);
     Route::get('/city/{id}/hero', [CityController::class,'showHero']);
+    Route::post('/city/create', [CityController::class,'store']);
+    Route::delete('/city/{id}/delete', [CityController::class,'destroy']);
 
     Route::get('/transport', [TransportController::class,'index']);
     Route::get('/transport/{id}', [TransportController::class,'show']);
