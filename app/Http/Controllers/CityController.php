@@ -115,17 +115,63 @@ class CityController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $idHero, string $idCity)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+   /**
+ * @OA\Put(
+ *      path="/api/city/{id}/update",
+ *      summary="update a city",
+ *      tags={"Modification"},
+        * @OA\Parameter(
+            *          name="id",
+            *          in="path",
+            *          required=true,
+            *          description="ID of the team",
+            *          @OA\Schema(type="integer")
+            *      ),
+ *      @OA\RequestBody(
+ *          required=true,
+ *          description="Update a city",
+ *          @OA\JsonContent(
+ *                  @OA\Property(property="name", type="string", format="text"),
+ *                  @OA\Property(property="description", type="string", format="text"),
+ *                  @OA\Property(property="size", type="integer", format="text")
+ *          ),
+ *      ),
+ *      @OA\Response(
+ *          response=201,
+ *          description="Data successfully added",
+ *          @OA\JsonContent(
+ *              type="object",
+ *              @OA\Property(property="message", type="string", example="Data successfully added"),
+ *          ),
+ *      ),
+ *      @OA\Response(
+ *          response=422,
+ *          description="Validation error",
+ *          @OA\JsonContent(
+ *              type="object",
+ *              @OA\Property(property="message", type="string", example="The given data was invalid."),
+ *              @OA\Property(property="errors", type="object"),
+ *          ),
+ *      ),
+ * )
+ */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'size' => 'required'
+        ]);
+
+        $city = City::find($id);
+        $city->update($data);
+
+        return response()->json($city, 201);
     }
 
     /**

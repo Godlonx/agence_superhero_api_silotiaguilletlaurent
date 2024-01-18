@@ -109,18 +109,77 @@ public function store(Request $request)
     }
 
     /**
-     * Update the specified resource in storage.
-     */
+ * @OA\Put(
+ *      path="/api/team/{id}/update",
+ *      summary="update a team",
+ *      tags={"Modification"},
+        * @OA\Parameter(
+            *          name="id",
+            *          in="path",
+            *          required=true,
+            *          description="ID of the team",
+            *          @OA\Schema(type="integer")
+            *      ),
+ *      @OA\RequestBody(
+ *          required=true,
+ *          description="Update a hero",
+ *          @OA\JsonContent(
+ *              @OA\Property(property="name", type="string", format="text")
+ *          ),
+ *      ),
+ *      @OA\Response(
+ *          response=201,
+ *          description="Data successfully added",
+ *          @OA\JsonContent(
+ *              type="object",
+ *              @OA\Property(property="message", type="string", example="Data successfully added"),
+ *          ),
+ *      ),
+ *      @OA\Response(
+ *          response=422,
+ *          description="Validation error",
+ *          @OA\JsonContent(
+ *              type="object",
+ *              @OA\Property(property="message", type="string", example="The given data was invalid."),
+ *              @OA\Property(property="errors", type="object"),
+ *          ),
+ *      ),
+ * )
+ */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validate([
+            'name' => 'sometimes'
+        ]);
+
+        $team = Team::find($id);
+        $team->update($data);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/api/team/{id}/delete",
+     *     tags={"Delete"},
+     *     @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          description="ID of the team",
+     *          @OA\Schema(type="integer")
+     *      ),
+     *     @OA\Response(response="204", description="Data successfully deleted")
+     * )
      */
     public function destroy(string $id)
     {
-        //
+        $team = Team::find($id);
+        $team->delete();
+        $hero = Hero::where('team_id', $id)->get();
+        foreach ($hero as $h) {
+            $h->team_id = 1;
+            $h->save();
+        }
+
+        return response()->json(null, 204);
     }
 }

@@ -9,4 +9,6 @@ class PowerLink extends Model
 {
     use HasFactory;
     protected $hidden = ['created_at', 'updated_at'];
+
+    protected $fillable = ["hero_id","power_id"];
 }
