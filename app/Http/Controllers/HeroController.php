@@ -11,6 +11,7 @@ use App\Models\City;
 use App\Models\Team;
 use App\Models\Transport;
 use Illuminate\Support\Facades\Auth;
+use Mockery\Undefined;
 
 class HeroController extends Controller
 {
@@ -28,7 +29,6 @@ class HeroController extends Controller
     public function index()
     {
         $hero = Hero::all();
-        $hero=$hero->makeHidden(['updated_at', 'created_at']);
         return response()->json($hero);
     }
 
@@ -168,13 +168,67 @@ class HeroController extends Controller
     {
         //
     }
-
     /**
-     * Update the specified resource in storage.
-     */
+ * @OA\Put(
+ *      path="/api/hero/{id}/update",
+ *      summary="update a hero",
+ *      tags={"Modification"},
+        * @OA\Parameter(
+            *          name="id",
+            *          in="path",
+            *          required=true,
+            *          description="ID of the hero",
+            *          @OA\Schema(type="integer")
+            *      ),
+ *      @OA\RequestBody(
+ *          required=true,
+ *          description="Update a hero",
+ *          @OA\JsonContent(
+ *              @OA\Property(property="name", type="string", format="text"),
+ *              @OA\Property(property="gender", type="string", format="text"),
+ *              @OA\Property(property="hair_color", type="string", format="text"),
+ *              @OA\Property(property="birth_planet", type="string", format="text"),
+ *              @OA\Property(property="team_id", type="integer", format="int"),
+ *              @OA\Property(property="description", type="string", format="text"),
+ *              @OA\Property(property="transport_way", type="integer", format="text"),
+ *              @OA\Property(property="city_id", type="integer", format="int"),
+ *
+ *          ),
+ *      ),
+ *      @OA\Response(
+ *          response=201,
+ *          description="Data successfully added",
+ *          @OA\JsonContent(
+ *              type="object",
+ *              @OA\Property(property="message", type="string", example="Data successfully added"),
+ *          ),
+ *      ),
+ *      @OA\Response(
+ *          response=422,
+ *          description="Validation error",
+ *          @OA\JsonContent(
+ *              type="object",
+ *              @OA\Property(property="message", type="string", example="The given data was invalid."),
+ *              @OA\Property(property="errors", type="object"),
+ *          ),
+ *      ),
+ * )
+ */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validate([
+            'name' => 'sometimes',
+            'gender' => 'sometimes',
+            'hair_color' => 'sometimes',
+            'birth_planet' => 'sometimes',
+            'description' => 'sometimes',
+            'team_id' => 'sometimes',
+            'transport_way' => 'sometimes',
+        ]);
+
+        $hero = Hero::find($id);
+        $hero->update($data);
+
     }
 
     /**
