@@ -1,0 +1,1555 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Agence super hero api",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Log an user",
+                "operationId": "loginUser",
+                "requestBody": {
+                    "description": "User registration data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password",
+                                    "_token"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User successfully logged",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User logged successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Register a new user",
+                "operationId": "registerUser",
+                "requestBody": {
+                    "description": "User registration data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "_token"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "format": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User successfully registered",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User registered successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/city": {
+            "get": {
+                "tags": [
+                    "Display"
+                ],
+                "operationId": "c2504917c4da1139bffc3dd1d5409f8f",
+                "responses": {
+                    "200": {
+                        "description": "Display all cities"
+                    }
+                }
+            }
+        },
+        "/api/city/create": {
+            "post": {
+                "tags": [
+                    "Creation"
+                ],
+                "summary": "Create a city",
+                "operationId": "4d91474aa13e2c7acbdfbed7d92d60c7",
+                "requestBody": {
+                    "description": "Create a new city",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "size"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "size": {
+                                        "type": "integer",
+                                        "format": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data successfully added"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/city/{id}": {
+            "get": {
+                "tags": [
+                    "Display"
+                ],
+                "operationId": "5a7b6766b61b35c52ccb43edd7a33259",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the city",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Display a specific city and its heroes"
+                    }
+                }
+            }
+        },
+        "/api/city/{id}/update": {
+            "put": {
+                "tags": [
+                    "Modification"
+                ],
+                "summary": "update a city",
+                "operationId": "ffd2071dea65048e02bafa5f492558cc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the team",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update a city",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "size": {
+                                        "type": "integer",
+                                        "format": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data successfully added"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/city/{id}/delete": {
+            "delete": {
+                "tags": [
+                    "Delete"
+                ],
+                "operationId": "166f1ebe670e9d019e85344344a3c222",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the city",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Data successfully deleted"
+                    }
+                }
+            }
+        },
+        "/api/cityLink/create": {
+            "post": {
+                "tags": [
+                    "Creation"
+                ],
+                "summary": "Link a city to a hero",
+                "operationId": "50f52bcadb1a37aa89ae2b4548a259fe",
+                "requestBody": {
+                    "description": "Link a city to a hero",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "hero_id",
+                                    "city_id"
+                                ],
+                                "properties": {
+                                    "hero_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "city_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data successfully added"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cityLink/delete": {
+            "delete": {
+                "tags": [
+                    "Delete"
+                ],
+                "summary": "Delete a link beetween a city and a hero",
+                "operationId": "42f9dce2d424a6b648ae595333da6c69",
+                "requestBody": {
+                    "description": "Delete a link beetween a city and a hero",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "hero_id",
+                                    "city_id"
+                                ],
+                                "properties": {
+                                    "hero_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "city_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data successfully deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data successfully added"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/hero": {
+            "get": {
+                "tags": [
+                    "Display"
+                ],
+                "operationId": "df30085c1784aaa94727132391699837",
+                "responses": {
+                    "200": {
+                        "description": "Display all heroes"
+                    },
+                    "405": {
+                        "description": "Not connected"
+                    }
+                }
+            }
+        },
+        "/api/hero/create": {
+            "post": {
+                "tags": [
+                    "Creation"
+                ],
+                "summary": "Create a hero",
+                "operationId": "a969e1584e2db760265d9f3b1cb5a025",
+                "requestBody": {
+                    "description": "Create a new hero",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "gender",
+                                    "hair_color",
+                                    "birth_planet",
+                                    "description",
+                                    "team_id",
+                                    "transport_way"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "hair_color": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "birth_planet": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "team_id": {
+                                        "type": "integer",
+                                        "format": "int"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "transport_way": {
+                                        "type": "integer",
+                                        "format": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data successfully added"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/hero/{id}": {
+            "get": {
+                "tags": [
+                    "Display"
+                ],
+                "operationId": "d654731c0fa7cbd45d89898b400c557b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the hero",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Display a specific hero and his power, transport, city, and team"
+                    }
+                }
+            }
+        },
+        "/api/hero/{id}/update": {
+            "put": {
+                "tags": [
+                    "Modification"
+                ],
+                "summary": "update a hero",
+                "operationId": "ef832ee602095b8a577561f095fee6b0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the hero",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update a hero",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "hair_color": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "birth_planet": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "team_id": {
+                                        "type": "integer",
+                                        "format": "int"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "transport_way": {
+                                        "type": "integer",
+                                        "format": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data successfully added"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/hero/{id}/delete": {
+            "delete": {
+                "tags": [
+                    "Delete"
+                ],
+                "operationId": "ef9fa01ed6a6bbc27a0be36c626888e6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the hero",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Data successfully deleted"
+                    }
+                }
+            }
+        },
+        "/api/power": {
+            "get": {
+                "tags": [
+                    "Display"
+                ],
+                "operationId": "4fedc55085482d5a4fc20263ebb58daa",
+                "responses": {
+                    "200": {
+                        "description": "Display all powers"
+                    }
+                }
+            }
+        },
+        "/api/power/create": {
+            "post": {
+                "tags": [
+                    "Creation"
+                ],
+                "summary": "Create a power",
+                "operationId": "55a7ebe34f4bb9b114d8ef54ee12d623",
+                "requestBody": {
+                    "description": "Create a new power",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data successfully added"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/power/{id}": {
+            "get": {
+                "tags": [
+                    "Display"
+                ],
+                "operationId": "ed9ba669ac7fe798127dfcdde810166d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the city",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Display a specific power"
+                    }
+                }
+            }
+        },
+        "/api/power/{id}/update": {
+            "put": {
+                "tags": [
+                    "Modification"
+                ],
+                "summary": "update a power",
+                "operationId": "6225ce9f6b74d1ce89a46a9bf4b5815a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the power",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update a power",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data successfully added"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/power/{id}/delete": {
+            "delete": {
+                "tags": [
+                    "Delete"
+                ],
+                "operationId": "44380b63e3e3d1d86bccaf508051aeb3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the power",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Data successfully deleted"
+                    }
+                }
+            }
+        },
+        "/api/powerLink/create": {
+            "post": {
+                "tags": [
+                    "Creation"
+                ],
+                "summary": "Link a power to a hero",
+                "operationId": "8a6be13e8969638b6cdcb9480e77ba5e",
+                "requestBody": {
+                    "description": "Link a power to a hero",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "hero_id",
+                                    "power_id"
+                                ],
+                                "properties": {
+                                    "hero_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "power_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data successfully added"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/powerLink/delete": {
+            "delete": {
+                "tags": [
+                    "Delete"
+                ],
+                "summary": "Delete a link beetween a power and a hero",
+                "operationId": "ecab7ab8cfc35f7b9ff3d2dc99a5e92f",
+                "requestBody": {
+                    "description": "Delete a link beetween a power and a hero",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "hero_id",
+                                    "power_id"
+                                ],
+                                "properties": {
+                                    "hero_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "power_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data successfully deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data successfully added"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/team": {
+            "get": {
+                "tags": [
+                    "Display"
+                ],
+                "operationId": "8552dd0225e6b98cfd20200cff987939",
+                "responses": {
+                    "200": {
+                        "description": "Display all team"
+                    }
+                }
+            }
+        },
+        "/api/team/create": {
+            "post": {
+                "tags": [
+                    "Creation"
+                ],
+                "summary": "Create a team",
+                "operationId": "107099cc4e7ed66a9dae60826292b16e",
+                "requestBody": {
+                    "description": "Create a new team",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Team successfully added"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/team/{id}": {
+            "get": {
+                "tags": [
+                    "Display"
+                ],
+                "operationId": "71327544c30baa9706be0707cfeb2459",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the city",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Display a specific team and its heroes"
+                    }
+                }
+            }
+        },
+        "/api/team/{id}/update": {
+            "put": {
+                "tags": [
+                    "Modification"
+                ],
+                "summary": "update a team",
+                "operationId": "746adda74fa962a76f6e56da074e3b26",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the team",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update a hero",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data successfully added"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/team/{id}/delete": {
+            "delete": {
+                "tags": [
+                    "Delete"
+                ],
+                "operationId": "73ec229a3f885243879635ed95215c8d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the team",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Data successfully deleted"
+                    }
+                }
+            }
+        },
+        "/api/transport": {
+            "get": {
+                "tags": [
+                    "Display"
+                ],
+                "operationId": "b7f0216947d61b7904187ade2f36a818",
+                "responses": {
+                    "200": {
+                        "description": "Display all transport"
+                    },
+                    "405": {
+                        "description": "Not connected"
+                    }
+                }
+            }
+        },
+        "/api/transport/create": {
+            "post": {
+                "tags": [
+                    "Creation"
+                ],
+                "summary": "Create a transport",
+                "operationId": "4e7dcc956104ee6c4e30fa35d9833a7f",
+                "requestBody": {
+                    "description": "Create a new transport",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "size"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "size": {
+                                        "type": "integer",
+                                        "format": "int"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data successfully added"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/transport/{id}": {
+            "get": {
+                "tags": [
+                    "Display"
+                ],
+                "operationId": "70527cd4cfd2f55202dfd5cc4f137767",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the transport",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Display a specific transport"
+                    }
+                }
+            }
+        },
+        "/api/transport/{id}/update": {
+            "put": {
+                "tags": [
+                    "Modification"
+                ],
+                "summary": "update a transport",
+                "operationId": "7d829cc76a325a308315838a8760fad6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the transport",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update a transport",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "size": {
+                                        "type": "integer",
+                                        "format": "int"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data successfully updated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/transport/{id}/delete": {
+            "delete": {
+                "tags": [
+                    "Delete"
+                ],
+                "operationId": "3cf32dbbd3295b2d696c4638a89201ca",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the transport",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Data successfully deleted"
+                    }
+                }
+            }
+        }
+    }
+}
