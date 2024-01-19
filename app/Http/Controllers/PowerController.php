@@ -11,6 +11,7 @@ class PowerController extends Controller
     /**
      * @OA\Get(
      *     path="/api/power",
+     *     tags={"Display"},
      *     @OA\Response(response="200", description="Display all powers")
      * )
      */
@@ -82,6 +83,7 @@ class PowerController extends Controller
     /**
      * @OA\Get(
      *     path="/api/power/{id}",
+     *     tags={"Display"},
      *     @OA\Parameter(
      *          name="id",
      *          in="path",

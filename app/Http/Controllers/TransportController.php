@@ -11,6 +11,7 @@ class TransportController extends Controller
 
     /**
      * @OA\Get(
+     *     tags={"Display"},
      *     path="/api/transport",
      *     @OA\Response(response="200", description="Display all transport"),
      *     @OA\Response(response="405", description="Not connected")
@@ -75,6 +76,7 @@ class TransportController extends Controller
     /**
      * @OA\Get(
      *     path="/api/transport/{id}",
+     *     tags={"Display"},
      *     @OA\Parameter(
      *          name="id",
      *          in="path",

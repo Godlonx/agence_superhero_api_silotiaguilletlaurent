@@ -10,6 +10,7 @@ class TeamController extends Controller
 {
         /**
      * @OA\Get(
+     *     tags={"Display"},
      *     path="/api/team",
      *     @OA\Response(response="200", description="Display all team")
      * )
@@ -78,6 +79,7 @@ public function store(Request $request)
 
     /**
      * @OA\Get(
+     *     tags={"Display"},
      *     path="/api/team/{id}",
      *     @OA\Parameter(
     *          name="id",

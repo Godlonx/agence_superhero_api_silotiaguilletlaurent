@@ -159,6 +159,9 @@
         },
         "/api/city": {
             "get": {
+                "tags": [
+                    "Display"
+                ],
                 "operationId": "c2504917c4da1139bffc3dd1d5409f8f",
                 "responses": {
                     "200": {
@@ -245,6 +248,9 @@
         },
         "/api/city/{id}": {
             "get": {
+                "tags": [
+                    "Display"
+                ],
                 "operationId": "5a7b6766b61b35c52ccb43edd7a33259",
                 "parameters": [
                     {
@@ -512,29 +518,11 @@
                 }
             }
         },
-        "/api/guest": {
-            "get": {
-                "operationId": "f0f74000b26dc33bff25d691fb5ef9fc",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "unauthorized page",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "401": {
-                        "description": "Not connected"
-                    }
-                }
-            }
-        },
         "/api/hero": {
             "get": {
+                "tags": [
+                    "Display"
+                ],
                 "operationId": "df30085c1784aaa94727132391699837",
                 "responses": {
                     "200": {
@@ -644,6 +632,9 @@
         },
         "/api/hero/{id}": {
             "get": {
+                "tags": [
+                    "Display"
+                ],
                 "operationId": "d654731c0fa7cbd45d89898b400c557b",
                 "parameters": [
                     {
@@ -715,10 +706,6 @@
                                     "transport_way": {
                                         "type": "integer",
                                         "format": "text"
-                                    },
-                                    "city_id": {
-                                        "type": "integer",
-                                        "format": "int"
                                     }
                                 },
                                 "type": "object"
@@ -791,6 +778,9 @@
         },
         "/api/power": {
             "get": {
+                "tags": [
+                    "Display"
+                ],
                 "operationId": "4fedc55085482d5a4fc20263ebb58daa",
                 "responses": {
                     "200": {
@@ -872,6 +862,9 @@
         },
         "/api/power/{id}": {
             "get": {
+                "tags": [
+                    "Display"
+                ],
                 "operationId": "ed9ba669ac7fe798127dfcdde810166d",
                 "parameters": [
                     {
@@ -1137,6 +1130,9 @@
         },
         "/api/team": {
             "get": {
+                "tags": [
+                    "Display"
+                ],
                 "operationId": "8552dd0225e6b98cfd20200cff987939",
                 "responses": {
                     "200": {
@@ -1213,6 +1209,9 @@
         },
         "/api/team/{id}": {
             "get": {
+                "tags": [
+                    "Display"
+                ],
                 "operationId": "71327544c30baa9706be0707cfeb2459",
                 "parameters": [
                     {
@@ -1332,6 +1331,9 @@
         },
         "/api/transport": {
             "get": {
+                "tags": [
+                    "Display"
+                ],
                 "operationId": "b7f0216947d61b7904187ade2f36a818",
                 "responses": {
                     "200": {
@@ -1421,6 +1423,9 @@
         },
         "/api/transport/{id}": {
             "get": {
+                "tags": [
+                    "Display"
+                ],
                 "operationId": "70527cd4cfd2f55202dfd5cc4f137767",
                 "parameters": [
                     {
