@@ -156,6 +156,7 @@ class PowerController extends Controller
 
         $power = Power::find($id);
         $power->update($data);
+        return response()->json($power, 201);
     }
 
     /**

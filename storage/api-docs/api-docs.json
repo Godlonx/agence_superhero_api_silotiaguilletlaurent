@@ -1343,6 +1343,82 @@
                 }
             }
         },
+        "/api/transport/create": {
+            "post": {
+                "tags": [
+                    "Creation"
+                ],
+                "summary": "Create a transport",
+                "operationId": "4e7dcc956104ee6c4e30fa35d9833a7f",
+                "requestBody": {
+                    "description": "Create a new transport",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "size"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "size": {
+                                        "type": "integer",
+                                        "format": "int"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data successfully added"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/transport/{id}": {
             "get": {
                 "operationId": "70527cd4cfd2f55202dfd5cc4f137767",
@@ -1360,6 +1436,112 @@
                 "responses": {
                     "200": {
                         "description": "Display a specific transport"
+                    }
+                }
+            }
+        },
+        "/api/transport/{id}/update": {
+            "put": {
+                "tags": [
+                    "Modification"
+                ],
+                "summary": "update a transport",
+                "operationId": "7d829cc76a325a308315838a8760fad6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the transport",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update a transport",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "text"
+                                    },
+                                    "size": {
+                                        "type": "integer",
+                                        "format": "int"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data successfully updated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/transport/{id}/delete": {
+            "delete": {
+                "tags": [
+                    "Delete"
+                ],
+                "operationId": "3cf32dbbd3295b2d696c4638a89201ca",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the transport",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Data successfully deleted"
                     }
                 }
             }

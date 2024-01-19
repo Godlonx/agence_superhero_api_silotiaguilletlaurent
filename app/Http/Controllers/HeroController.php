@@ -132,8 +132,8 @@ class HeroController extends Controller
         $transportId = Hero::select('transport_way')->where('id', $id);
         $transport = Transport::find($transportId);
 
-        $cityId = CityLink::select('city_id')->where('hero_id', $id);
-        $city = City::find($cityId);
+        $cityId = CityLink::select('city_id')->where('hero_id', $id)->get();
+        $city = City::whereIn('id', $cityId)->get();
 
 
         $teamId = Hero::select('team_id')->where('id', $id);

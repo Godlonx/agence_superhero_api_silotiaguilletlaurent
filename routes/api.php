@@ -75,6 +75,10 @@ Route::middleware(['web','auth:sanctum'])->group(function () {
 
     Route::get('/transport', [TransportController::class,'index']);
     Route::get('/transport/{id}', [TransportController::class,'show']);
+    Route::post('/transport/create', [TransportController::class,'store']);
+    Route::delete('/transport/{id}/delete', [TransportController::class,'destroy']);
+    Route::put('/transport/{id}/update', [TransportController::class,'update']);
+    
 
 });
 
