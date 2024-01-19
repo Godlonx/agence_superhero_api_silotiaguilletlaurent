@@ -22,6 +22,7 @@ class HeroController extends Controller
     /**
      * @OA\Get(
      *     path="/api/hero",
+     *     tags={"Display"},
      *     @OA\Response(response="200", description="Display all heroes"),
      *     @OA\Response(response="405", description="Not connected")
      * )
@@ -110,6 +111,7 @@ class HeroController extends Controller
     /**
      * @OA\Get(
      *     path="/api/hero/{id}",
+     *     tags={"Display"},
      *     @OA\Parameter(
      *          name="id",
      *          in="path",
@@ -132,8 +134,8 @@ class HeroController extends Controller
         $transportId = Hero::select('transport_way')->where('id', $id);
         $transport = Transport::find($transportId);
 
-        $cityId = CityLink::select('city_id')->where('hero_id', $id);
-        $city = City::find($cityId);
+        $cityId = CityLink::select('city_id')->where('hero_id', $id)->get();
+        $city = City::whereIn('id', $cityId)->get();
 
 
         $teamId = Hero::select('team_id')->where('id', $id);
@@ -181,9 +183,7 @@ class HeroController extends Controller
  *              @OA\Property(property="birth_planet", type="string", format="text"),
  *              @OA\Property(property="team_id", type="integer", format="int"),
  *              @OA\Property(property="description", type="string", format="text"),
- *              @OA\Property(property="transport_way", type="integer", format="text"),
- *              @OA\Property(property="city_id", type="integer", format="int"),
- *
+ *              @OA\Property(property="transport_way", type="integer", format="text")
  *          ),
  *      ),
  *      @OA\Response(

@@ -15,6 +15,7 @@ class CityController extends Controller
 
     /**
      * @OA\Get(
+     *     tags={"Display"},
      *     path="/api/city",
      *     @OA\Response(response="200", description="Display all cities")
      * )
@@ -86,6 +87,7 @@ class CityController extends Controller
 
     /**
      * @OA\Get(
+     *     tags={"Display"},
      *     path="/api/city/{id}",
      *     @OA\Parameter(
     *          name="id",
