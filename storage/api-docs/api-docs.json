@@ -566,9 +566,7 @@
                                     "birth_planet",
                                     "description",
                                     "team_id",
-                                    "transport_way",
-                                    "city_id",
-                                    "power_id"
+                                    "transport_way"
                                 ],
                                 "properties": {
                                     "name": {
@@ -598,14 +596,6 @@
                                     "transport_way": {
                                         "type": "integer",
                                         "format": "text"
-                                    },
-                                    "city_id": {
-                                        "type": "integer",
-                                        "format": "int"
-                                    },
-                                    "power_id": {
-                                        "type": "integer",
-                                        "format": "int"
                                     }
                                 },
                                 "type": "object"

@@ -49,7 +49,7 @@ class HeroController extends Controller
  *          required=true,
  *          description="Create a new hero",
  *          @OA\JsonContent(
- *              required={"name","gender","hair_color","birth_planet","description","team_id","transport_way","city_id","power_id"},
+ *              required={"name","gender","hair_color","birth_planet","description","team_id","transport_way"},
  *              @OA\Property(property="name", type="string", format="text"),
  *              @OA\Property(property="gender", type="string", format="text"),
  *              @OA\Property(property="hair_color", type="string", format="text"),
@@ -57,8 +57,6 @@ class HeroController extends Controller
  *              @OA\Property(property="team_id", type="integer", format="int"),
  *              @OA\Property(property="description", type="string", format="text"),
  *              @OA\Property(property="transport_way", type="integer", format="text"),
- *              @OA\Property(property="city_id", type="integer", format="int"),
- *              @OA\Property(property="power_id", type="integer", format="int")
  *
  *          ),
  *      ),
@@ -91,27 +89,19 @@ class HeroController extends Controller
             'description' => 'required',
             'team_id' => 'required',
             'transport_way' => 'required',
-            //'city_id' => 'required',
-            'power_id' => 'required'
         ]);
 
 
         $hero = new Hero();
-        $hero->name = $data['name'];
-        $hero->gender = $data['gender'];
-        $hero->hair_color = $data['hair_color'];
-        $hero->birth_planet = $data['birth_planet'];
-        $hero->description = $data['description'];
-        $hero->team_id = $data['team_id'];
-        $hero->transport_way = $data['transport_way'];
-
+        $hero->name = $request->name;
+        $hero->gender = $request->gender;
+        $hero->hair_color = $request->hair_color;
+        $hero->birth_planet = $request->birth_planet;
+        $hero->description = $request->description;
+        $hero->team_id = $request->team_id;
+        $hero->transport_way = $request->transport_way;
         $hero->save();
 
-        $powerLink = new PowerLink();
-        $powerLink->hero_id = $hero->id;
-        $powerLink->power_id = $data['power_id'];
-        $powerLink->save();
-        //$hero->city()->attach($data['city_id']);
 
 
         return response()->json($hero, 201);
@@ -135,8 +125,9 @@ class HeroController extends Controller
 
         $hero = Hero::find($id);
 
-        $powerId = PowerLink::select('power_id')->where('hero_id', $id);
-        $power = Power::find($powerId);
+        $powerId = PowerLink::select('power_id')->where('hero_id', $id)->get();
+        $power = Power::whereIn('id', $powerId)->get();
+
 
         $transportId = Hero::select('transport_way')->where('id', $id);
         $transport = Transport::find($transportId);

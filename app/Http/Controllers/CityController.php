@@ -163,9 +163,9 @@ class CityController extends Controller
     public function update(Request $request, string $id)
     {
         $data = $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'size' => 'required'
+            'name' => 'sometimes',
+            'description' => 'sometimes',
+            'size' => 'sometimes'
         ]);
 
         $city = City::find($id);
@@ -191,6 +191,11 @@ class CityController extends Controller
     public function destroy(string $id)
     {
         $city = City::find($id);
+        if ($city == null) {
+            return response()->json([
+                'message' => 'Data not found',
+            ], 404);
+        }
         $city->delete();
         $cityLink = CityLink::where('city_id', $id);
         $cityLink->delete();
